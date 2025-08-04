@@ -39,6 +39,9 @@ var groqConfig []byte
 //go:embed configs/lambda.json
 var lambdaConfig []byte
 
+//go:embed configs/zai.json
+var zaiConfig []byte
+
 // ProviderFunc is a function that returns a Provider.
 type ProviderFunc func() catwalk.Provider
 
@@ -53,6 +56,7 @@ var providerRegistry = []ProviderFunc{
 	groqProvider,
 	openRouterProvider,
 	lambdaProvider,
+	zaiProvider,
 }
 
 // GetAll returns all registered providers.
@@ -111,4 +115,8 @@ func groqProvider() catwalk.Provider {
 
 func lambdaProvider() catwalk.Provider {
 	return loadProviderFromConfig(lambdaConfig)
+}
+
+func zaiProvider() catwalk.Provider {
+	return loadProviderFromConfig(zaiConfig)
 }
